@@ -5,9 +5,9 @@
 	/*
 	License: MIT
 	*/
-	
+
 	require_once(EXTENSIONS . '/image_preview/fields/field.image_preview_settings.php');
-	
+
 	class extension_image_preview extends Extension {
 
 		public function getSubscribedDelegates(){
@@ -19,7 +19,7 @@
 				)
 			);
 		}
-		
+
 		// FROM: http://stackoverflow.com/questions/834303/php-startswith-and-endswith-functions
 		private function startsWith($haystack, $needle) {
 			$length = strlen($needle);
@@ -29,15 +29,16 @@
 		public function appendJS($context){
 			$c = Administration::instance()->getPageCallback();
 			$c = $c['pageroot'];
-			
+
 			// Only add when editing a section
 			if ($this->startsWith($c, '/publish/')) {
-				Administration::instance()->Page->addScriptToHead('/extensions/image_preview/assets/image_preview.js',time()+1);
+				Administration::instance()->Page->addScriptToHead(URL . '/extensions/image_preview/assets/image_preview.js', time() + 1);
+				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/image_preview/assets/image_preview.css', 'screen');
 			}
 		}
-		
-		
-		
+
+
+
 		/* ********* INSTALL/UPDATE/UNISTALL ******* */
 
 		/**
@@ -46,8 +47,8 @@
 		public function install() {
 			return FieldImage_Preview_Settings::createFieldTable();
 		}
-		
-		
+
+
 		/**
 		 * Creates the table needed for the settings of the field
 		 */
@@ -60,7 +61,7 @@
 			}
 			return $ret;
 		}
-		
+
 		/**
 		 *
 		 * Drops the table needed for the settings of the field

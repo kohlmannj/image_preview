@@ -1,0 +1,5 @@
+.file span.frame span {
+    float: left;
+    max-width: 100% !important;
+    overflow: hidden;
+}
